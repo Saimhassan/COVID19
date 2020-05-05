@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.covid19app.R;
 
-public class DashboardFragment extends Fragment {
+public class CountryFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
 
