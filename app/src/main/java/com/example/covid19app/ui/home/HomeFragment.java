@@ -25,9 +25,12 @@ import com.example.covid19app.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class HomeFragment extends Fragment {
 
-    private TextView tvTotalConfirmed,tvTotalDeaths,tvTotalRecovered;
+    private TextView tvTotalConfirmed,tvTotalDeaths,tvTotalRecovered,tvLastUpdated;
     private ProgressBar progressBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -37,12 +40,23 @@ public class HomeFragment extends Fragment {
         tvTotalConfirmed = root.findViewById(R.id.tv_total_confirmed);
         tvTotalDeaths = root.findViewById(R.id.tv_deaths_confirmed);
         tvTotalRecovered = root.findViewById(R.id.tv_recovered_confirmed);
+        tvLastUpdated = root.findViewById(R.id.tvLastUpdated);
         progressBar = root.findViewById(R.id.progress_circular_home);
         //Call volley
         getData();
 
         return root;
     }
+
+    private String getDate(long milliSecond)
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE,dd MM yyyy hh:mm:ss aaa");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSecond);
+        return formatter.format(calendar.getTime());
+    }
+
 
     private void getData() {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
@@ -56,6 +70,7 @@ public class HomeFragment extends Fragment {
                     tvTotalConfirmed.setText(jsonObject.getString("cases"));
                     tvTotalDeaths.setText(jsonObject.getString("deaths"));
                     tvTotalRecovered.setText(jsonObject.getString("recovered"));
+                    tvLastUpdated.setText("Last Updated"+"\n"+getDate(jsonObject.getLong("updated")));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

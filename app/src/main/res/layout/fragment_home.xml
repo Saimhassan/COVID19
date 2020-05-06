@@ -73,6 +73,17 @@
             android:textColor="@color/colorTotalRecovered"
             style="@style/TotalFontStyle"
             tools:text="150000"/>
+
+        <TextView
+            style="@style/LabelFontStyle"
+            android:textColor="@android:color/white"
+            android:textAlignment="center"
+            android:layout_marginTop="20dp"
+            tools:text="Last Updated\n Mon, 5 May 2020 11:33:00 PM"
+            android:id="@+id/tvLastUpdated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         
     </LinearLayout>
     
